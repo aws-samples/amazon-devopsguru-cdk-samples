@@ -1,4 +1,4 @@
-# Amazon DevOps Guru Samples
+# Amazon DevOps Guru CDK Samples
 
 [Amazon DevOps Guru](https://aws.amazon.com/devops-guru/) is a machine learning (ML) powered service that gives you a simpler way to improve an application’s availability and reduce expensive downtime. Without involving any complex configuration setup, DevOps Guru automatically ingests operational data in your AWS cloud. When DevOps Guru identifies a critical issue, it automatically alerts you with a summary of related anomalies, the likely root cause, and context on when and where the issue occurred. DevOps Guru also, when possible, provides prescriptive recommendations on how to remediate the issue.
 
