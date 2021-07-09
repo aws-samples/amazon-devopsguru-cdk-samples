@@ -1,0 +1,1244 @@
+{
+  "Resources": {
+    "DdbTable28A7E8F5": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "KeySchema": [
+          {
+            "AttributeName": "name",
+            "KeyType": "HASH"
+          }
+        ],
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "name",
+            "AttributeType": "S"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5
+        },
+        "TableName": "DdbTable"
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/DdbTable/Resource"
+      }
+    },
+    "LambdaExecutionRoleD5C26073": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/LambdaExecutionRole/Resource"
+      }
+    },
+    "CreateFunctionMonitorOperator0C65E561": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "ZipFile": "'use strict';\n        const AWS = require('aws-sdk');\n        const docClient = new AWS.DynamoDB.DocumentClient();\n        const tableName = process.env.TABLE_NAME;\n        exports.lambda_handler = (event, context, callback) => {\n          console.log('Received event:', JSON.stringify(event, null, 2));\n          const shop = create_shop_struct(event);\n          var params = {\n            TableName: tableName,\n            Item: {\n              name: shop.name,\n              specialty: shop.specialty,\n              address: shop.address,\n              url: shop.url,\n              description: shop.description\n            }\n          };\n          docClient.put(params, function(err, data) {\n            if (err) callback(err)\n            callback(null, {\n              statusCode: 200,\n              body: JSON.stringify(shop)\n            });\n          });\n        };\n        \n        var create_shop_struct = function(event) {\n          const body = JSON.parse(event.body);\n        \n          return {\n            name: body.name,\n            specialty: body.specialty,\n            address: body.address,\n            url: body.url,\n            description: body.description\n          };\n        };\n        "
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "LambdaExecutionRoleD5C26073",
+            "Arn"
+          ]
+        },
+        "Environment": {
+          "Variables": {
+            "TABLE_NAME": {
+              "Ref": "DdbTable28A7E8F5"
+            }
+          }
+        },
+        "FunctionName": "CreateFunctionMonitorOperator",
+        "Handler": "index.handler",
+        "Runtime": "nodejs12.x"
+      },
+      "DependsOn": [
+        "LambdaExecutionRoleD5C26073"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateFunctionMonitorOperator/Resource"
+      }
+    },
+    "ListLambdaRole0ACD01C2": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListLambdaRole/Resource"
+      }
+    },
+    "ListLambdaRoleDefaultPolicy47F23E4A": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:Scan",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "ListLambdaRoleDefaultPolicy47F23E4A",
+        "Roles": [
+          {
+            "Ref": "ListLambdaRole0ACD01C2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListLambdaRole/DefaultPolicy/Resource"
+      }
+    },
+    "ScanLambdaRole782038F2": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ScanLambdaRole/Resource"
+      }
+    },
+    "ScanLambdaRoleDefaultPolicyFFA00BE6": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:GetItem"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "ScanLambdaRoleDefaultPolicyFFA00BE6",
+        "Roles": [
+          {
+            "Ref": "ScanLambdaRole782038F2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ScanLambdaRole/DefaultPolicy/Resource"
+      }
+    },
+    "ScanFunctionMonitorOperatorF0675051": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "ZipFile": "'use strict';\n      const AWS = require('aws-sdk');\n      const docClient = new AWS.DynamoDB.DocumentClient();\n      const tableName = process.env.TABLE_NAME;\n      exports.lambda_handler = (event, context, callback) => {\n        console.log('Received event:', JSON.stringify(event, null, 2));\n        var params = {\n          TableName: tableName\n        };\n        docClient.scan(params, function(err, data) {\n          if (err) callback(err)\n          callback(null, {\n            statusCode: 200,\n            body: JSON.stringify(data.Items)\n          });\n        });\n      };"
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "ScanLambdaRole782038F2",
+            "Arn"
+          ]
+        },
+        "Environment": {
+          "Variables": {
+            "TABLE_NAME": {
+              "Ref": "DdbTable28A7E8F5"
+            }
+          }
+        },
+        "FunctionName": "ScanFunctionMonitorOperator",
+        "Handler": "index.lambda_handler",
+        "Runtime": "nodejs12.x"
+      },
+      "DependsOn": [
+        "ScanLambdaRoleDefaultPolicyFFA00BE6",
+        "ScanLambdaRole782038F2"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ScanFunctionMonitorOperator/Resource"
+      }
+    },
+    "CreateRestApiMonitorOperator07E4009D": {
+      "Type": "AWS::ApiGateway::RestApi",
+      "Properties": {
+        "Description": "Create Rest API",
+        "EndpointConfiguration": {
+          "Types": [
+            "REGIONAL"
+          ]
+        },
+        "Name": "CreateRestApiMonitorOperator"
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/Resource"
+      }
+    },
+    "CreateRestApiMonitorOperatorCloudWatchRoleB8EBFD97": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "apigateway.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+              ]
+            ]
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/CloudWatchRole/Resource"
+      }
+    },
+    "CreateRestApiMonitorOperatorAccountB20F0D7A": {
+      "Type": "AWS::ApiGateway::Account",
+      "Properties": {
+        "CloudWatchRoleArn": {
+          "Fn::GetAtt": [
+            "CreateRestApiMonitorOperatorCloudWatchRoleB8EBFD97",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "CreateRestApiMonitorOperator07E4009D"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/Account"
+      }
+    },
+    "CreateRestApiMonitorOperatorDeploymentAD8A20FF155573d8348d80aeffc6de975a4015e3": {
+      "Type": "AWS::ApiGateway::Deployment",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "CreateRestApiMonitorOperator07E4009D"
+        },
+        "Description": "Automatically created by the RestApi construct"
+      },
+      "DependsOn": [
+        "CreateRestApiMonitorOperatorproxyANY884D179B",
+        "CreateRestApiMonitorOperatorproxy435068DB",
+        "CreateRestApiMonitorOperatorANY2F31FFC5"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/Deployment/Resource"
+      }
+    },
+    "CreateRestApiMonitorOperatorDeploymentStageprodF9BD10D8": {
+      "Type": "AWS::ApiGateway::Stage",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "CreateRestApiMonitorOperator07E4009D"
+        },
+        "DeploymentId": {
+          "Ref": "CreateRestApiMonitorOperatorDeploymentAD8A20FF155573d8348d80aeffc6de975a4015e3"
+        },
+        "MethodSettings": [
+          {
+            "DataTraceEnabled": true,
+            "HttpMethod": "*",
+            "LoggingLevel": "INFO",
+            "ResourcePath": "/*"
+          }
+        ],
+        "StageName": "prod"
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/DeploymentStage.prod/Resource"
+      }
+    },
+    "CreateRestApiMonitorOperatorANYApiPermissionCdkInfrastructureStackdevCreateRestApiMonitorOperatorF0652651ANYB8B09929": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "CreateFunctionMonitorOperator0C65E561",
+            "Arn"
+          ]
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "CreateRestApiMonitorOperator07E4009D"
+              },
+              "/",
+              {
+                "Ref": "CreateRestApiMonitorOperatorDeploymentStageprodF9BD10D8"
+              },
+              "/*/"
+            ]
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/Default/ANY/ApiPermission.CdkInfrastructureStackdevCreateRestApiMonitorOperatorF0652651.ANY.."
+      }
+    },
+    "CreateRestApiMonitorOperatorANYApiPermissionTestCdkInfrastructureStackdevCreateRestApiMonitorOperatorF0652651ANY8ACD292B": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "CreateFunctionMonitorOperator0C65E561",
+            "Arn"
+          ]
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "CreateRestApiMonitorOperator07E4009D"
+              },
+              "/test-invoke-stage/*/"
+            ]
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/Default/ANY/ApiPermission.Test.CdkInfrastructureStackdevCreateRestApiMonitorOperatorF0652651.ANY.."
+      }
+    },
+    "CreateRestApiMonitorOperatorANY2F31FFC5": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "ANY",
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "CreateRestApiMonitorOperator07E4009D",
+            "RootResourceId"
+          ]
+        },
+        "RestApiId": {
+          "Ref": "CreateRestApiMonitorOperator07E4009D"
+        },
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "CreateFunctionMonitorOperator0C65E561",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/Default/ANY/Resource"
+      }
+    },
+    "CreateRestApiMonitorOperatorproxy435068DB": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "CreateRestApiMonitorOperator07E4009D",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "{proxy+}",
+        "RestApiId": {
+          "Ref": "CreateRestApiMonitorOperator07E4009D"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/Default/{proxy+}/Resource"
+      }
+    },
+    "CreateRestApiMonitorOperatorproxyANYApiPermissionCdkInfrastructureStackdevCreateRestApiMonitorOperatorF0652651ANYproxyCE86D3F8": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "CreateFunctionMonitorOperator0C65E561",
+            "Arn"
+          ]
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "CreateRestApiMonitorOperator07E4009D"
+              },
+              "/",
+              {
+                "Ref": "CreateRestApiMonitorOperatorDeploymentStageprodF9BD10D8"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/Default/{proxy+}/ANY/ApiPermission.CdkInfrastructureStackdevCreateRestApiMonitorOperatorF0652651.ANY..{proxy+}"
+      }
+    },
+    "CreateRestApiMonitorOperatorproxyANYApiPermissionTestCdkInfrastructureStackdevCreateRestApiMonitorOperatorF0652651ANYproxy704362CB": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "CreateFunctionMonitorOperator0C65E561",
+            "Arn"
+          ]
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "CreateRestApiMonitorOperator07E4009D"
+              },
+              "/test-invoke-stage/*/*"
+            ]
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/Default/{proxy+}/ANY/ApiPermission.Test.CdkInfrastructureStackdevCreateRestApiMonitorOperatorF0652651.ANY..{proxy+}"
+      }
+    },
+    "CreateRestApiMonitorOperatorproxyANY884D179B": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "ANY",
+        "ResourceId": {
+          "Ref": "CreateRestApiMonitorOperatorproxy435068DB"
+        },
+        "RestApiId": {
+          "Ref": "CreateRestApiMonitorOperator07E4009D"
+        },
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "CreateFunctionMonitorOperator0C65E561",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CreateRestApiMonitorOperator/Default/{proxy+}/ANY/Resource"
+      }
+    },
+    "ListRestApiMonitorOperator9624C308": {
+      "Type": "AWS::ApiGateway::RestApi",
+      "Properties": {
+        "Description": "List Rest API",
+        "EndpointConfiguration": {
+          "Types": [
+            "REGIONAL"
+          ]
+        },
+        "Name": "ListRestApiMonitorOperator"
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/Resource"
+      }
+    },
+    "ListRestApiMonitorOperatorCloudWatchRole361218EB": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "apigateway.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+              ]
+            ]
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/CloudWatchRole/Resource"
+      }
+    },
+    "ListRestApiMonitorOperatorAccount27EED395": {
+      "Type": "AWS::ApiGateway::Account",
+      "Properties": {
+        "CloudWatchRoleArn": {
+          "Fn::GetAtt": [
+            "ListRestApiMonitorOperatorCloudWatchRole361218EB",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "ListRestApiMonitorOperator9624C308"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/Account"
+      }
+    },
+    "ListRestApiMonitorOperatorDeployment82153E0Cd0f26c88656ebb7e97a095c8566bdd2f": {
+      "Type": "AWS::ApiGateway::Deployment",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ListRestApiMonitorOperator9624C308"
+        },
+        "Description": "Automatically created by the RestApi construct"
+      },
+      "DependsOn": [
+        "ListRestApiMonitorOperatorproxyANY3699C123",
+        "ListRestApiMonitorOperatorproxy8B7B72AF",
+        "ListRestApiMonitorOperatorANY53903C2C"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/Deployment/Resource"
+      }
+    },
+    "ListRestApiMonitorOperatorDeploymentStageprod8BAF59E8": {
+      "Type": "AWS::ApiGateway::Stage",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ListRestApiMonitorOperator9624C308"
+        },
+        "DeploymentId": {
+          "Ref": "ListRestApiMonitorOperatorDeployment82153E0Cd0f26c88656ebb7e97a095c8566bdd2f"
+        },
+        "MethodSettings": [
+          {
+            "DataTraceEnabled": true,
+            "HttpMethod": "*",
+            "LoggingLevel": "INFO",
+            "ResourcePath": "/*"
+          }
+        ],
+        "StageName": "prod"
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/DeploymentStage.prod/Resource"
+      }
+    },
+    "ListRestApiMonitorOperatorANYApiPermissionCdkInfrastructureStackdevListRestApiMonitorOperatorB0E690DDANYFB1170BC": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "ScanFunctionMonitorOperatorF0675051",
+            "Arn"
+          ]
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ListRestApiMonitorOperator9624C308"
+              },
+              "/",
+              {
+                "Ref": "ListRestApiMonitorOperatorDeploymentStageprod8BAF59E8"
+              },
+              "/*/"
+            ]
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/Default/ANY/ApiPermission.CdkInfrastructureStackdevListRestApiMonitorOperatorB0E690DD.ANY.."
+      }
+    },
+    "ListRestApiMonitorOperatorANYApiPermissionTestCdkInfrastructureStackdevListRestApiMonitorOperatorB0E690DDANY11D892AA": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "ScanFunctionMonitorOperatorF0675051",
+            "Arn"
+          ]
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ListRestApiMonitorOperator9624C308"
+              },
+              "/test-invoke-stage/*/"
+            ]
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/Default/ANY/ApiPermission.Test.CdkInfrastructureStackdevListRestApiMonitorOperatorB0E690DD.ANY.."
+      }
+    },
+    "ListRestApiMonitorOperatorANY53903C2C": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "ANY",
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "ListRestApiMonitorOperator9624C308",
+            "RootResourceId"
+          ]
+        },
+        "RestApiId": {
+          "Ref": "ListRestApiMonitorOperator9624C308"
+        },
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "ScanFunctionMonitorOperatorF0675051",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/Default/ANY/Resource"
+      }
+    },
+    "ListRestApiMonitorOperatorproxy8B7B72AF": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ListRestApiMonitorOperator9624C308",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "{proxy+}",
+        "RestApiId": {
+          "Ref": "ListRestApiMonitorOperator9624C308"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/Default/{proxy+}/Resource"
+      }
+    },
+    "ListRestApiMonitorOperatorproxyANYApiPermissionCdkInfrastructureStackdevListRestApiMonitorOperatorB0E690DDANYproxy85C79B37": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "ScanFunctionMonitorOperatorF0675051",
+            "Arn"
+          ]
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ListRestApiMonitorOperator9624C308"
+              },
+              "/",
+              {
+                "Ref": "ListRestApiMonitorOperatorDeploymentStageprod8BAF59E8"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/Default/{proxy+}/ANY/ApiPermission.CdkInfrastructureStackdevListRestApiMonitorOperatorB0E690DD.ANY..{proxy+}"
+      }
+    },
+    "ListRestApiMonitorOperatorproxyANYApiPermissionTestCdkInfrastructureStackdevListRestApiMonitorOperatorB0E690DDANYproxyF306FE0C": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "ScanFunctionMonitorOperatorF0675051",
+            "Arn"
+          ]
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ListRestApiMonitorOperator9624C308"
+              },
+              "/test-invoke-stage/*/*"
+            ]
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/Default/{proxy+}/ANY/ApiPermission.Test.CdkInfrastructureStackdevListRestApiMonitorOperatorB0E690DD.ANY..{proxy+}"
+      }
+    },
+    "ListRestApiMonitorOperatorproxyANY3699C123": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "ANY",
+        "ResourceId": {
+          "Ref": "ListRestApiMonitorOperatorproxy8B7B72AF"
+        },
+        "RestApiId": {
+          "Ref": "ListRestApiMonitorOperator9624C308"
+        },
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "ScanFunctionMonitorOperatorF0675051",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/ListRestApiMonitorOperator/Default/{proxy+}/ANY/Resource"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAAE02Q3U7DMAyFn4X7LFuFJuCOMcQVE1PhBdzEbNmauMoPUxXl3UnSVeqVP/vIPrYbHl+e+ebhFW5uJeR1Lcgij98exJW16ChYgWz/a76CH4JnezLO2yB8qS31LEjlFZnEms3TcmKJUY4GNMmOxx/o+tpRITEFmseWplqNR+qVGEs6UWI96E4Cjx/BiOJRtCUf0WrlXHWHQZ3A4w1GHj9rX17T7wZ133jGnRAUjGfvOPQ0ajT1pEWWf3CqS00wH/sGDtkB/ZlkEe+0fMXMKSVmSCK/uPVfs+WP+SsXp9TKZl+lkbdT/AcPkCdFhAEAAA=="
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkInfrastructureStack-dev/CDKMetadata/Default"
+      },
+      "Condition": "CDKMetadataAvailable"
+    }
+  },
+  "Outputs": {
+    "CreateRestApiMonitorOperatorEndpointD1D00045": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "CreateRestApiMonitorOperator07E4009D"
+            },
+            ".execute-api.",
+            {
+              "Ref": "AWS::Region"
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix"
+            },
+            "/",
+            {
+              "Ref": "CreateRestApiMonitorOperatorDeploymentStageprodF9BD10D8"
+            },
+            "/"
+          ]
+        ]
+      }
+    },
+    "ListRestApiMonitorOperatorEndpointABBDB8D8": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "ListRestApiMonitorOperator9624C308"
+            },
+            ".execute-api.",
+            {
+              "Ref": "AWS::Region"
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix"
+            },
+            "/",
+            {
+              "Ref": "ListRestApiMonitorOperatorDeploymentStageprod8BAF59E8"
+            },
+            "/"
+          ]
+        ]
+      }
+    }
+  },
+  "Conditions": {
+    "CDKMetadataAvailable": {
+      "Fn::Or": [
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "af-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ca-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-northwest-1"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-3"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "me-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "sa-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-2"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-2"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

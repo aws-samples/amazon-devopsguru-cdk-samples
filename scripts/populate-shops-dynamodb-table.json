@@ -1,0 +1,69 @@
+{
+    "DdbTable": [
+        {
+            "PutRequest": {
+                "Item": {
+                  "name": {
+                        "S": "a-cake-shop"
+                    },
+                  "specialty": {
+                        "S": "cake-shop"
+                    },
+                  "address": {
+                        "S": "1111 random drive, random city"
+                    },
+                  "url": {
+                        "S": "www.random-cake-shop.com"
+                    },
+                  "description": {
+                        "S": "This is my favorite cake shop"
+                    }
+                }
+            }
+
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                  "name": {
+                        "S": "a-light-shop"
+                    },
+                  "specialty": {
+                        "S": "light-shop"
+                    },
+                  "address": {
+                        "S": "2222 random drive, random city"
+                    },
+                  "url": {
+                        "S": "www.random-light-shop.com"
+                    },
+                  "description": {
+                        "S": "This is my favorite light shop"
+                    }
+                }
+            }
+
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                  "name": {
+                        "S": "a-sports-shop"
+                    },
+                  "specialty": {
+                        "S": "sports-shop"
+                    },
+                  "address": {
+                        "S": "3333 random drive, random city"
+                    },
+                  "url": {
+                        "S": "www.random-sports-shop.com"
+                    },
+                  "description": {
+                        "S": "This is my favorite sports shop"
+                    }
+                }
+            }
+        }
+    ]
+}

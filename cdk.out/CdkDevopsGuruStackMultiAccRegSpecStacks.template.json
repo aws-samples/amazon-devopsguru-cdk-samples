@@ -1,0 +1,256 @@
+{
+  "Description": "CDK Stack for enabling DevOps Guru Service for specific stack resources across multiple accounts and regions.",
+  "Parameters": {
+    "AdministratorAccountId": {
+      "Type": "String",
+      "Description": "Administrator Account Id"
+    },
+    "TargetAccountId": {
+      "Type": "String",
+      "Description": "Target Account Id"
+    },
+    "RegionIds": {
+      "Type": "List<String>",
+      "Description": "Region Ids to deploy StackSet"
+    }
+  },
+  "Resources": {
+    "DevopsGuruStackSetSpecStacks": {
+      "Type": "AWS::CloudFormation::StackSet",
+      "Properties": {
+        "PermissionModel": "SELF_MANAGED",
+        "StackSetName": "EnableDevOpsGuruStackSetMultiAccRegSpecSacks",
+        "Description": "CDK Stack Instance to Enable DevOpsGuru for Specific Stacks",
+        "OperationPreferences": {
+          "FailureToleranceCount": 0,
+          "MaxConcurrentCount": 1
+        },
+        "StackInstancesGroup": [
+          {
+            "DeploymentTargets": {
+              "Accounts": [
+                {
+                  "Ref": "AdministratorAccountId"
+                },
+                {
+                  "Ref": "TargetAccountId"
+                }
+              ]
+            },
+            "Regions": {
+              "Ref": "RegionIds"
+            }
+          }
+        ],
+        "TemplateBody": "\n        Resources:\n          DevOpsGuruMonitoring:\n            Type: AWS::DevOpsGuru::ResourceCollection\n            Properties:\n              ResourceCollectionFilter:\n                CloudFormation:\n                  StackNames: ['CdkInfrastructureStack']\n\n          DevOpsGuruTopic: \n            Type: AWS::SNS::Topic\n            Properties: \n              TopicName: devops-guru-spec-stack\n              Subscription:\n                - Endpoint: abc@xyz.com\n                  Protocol: email\n          \n          DevOpsGuruNotification:\n            Type: AWS::DevOpsGuru::NotificationChannel\n            Properties:\n              Config:\n                Sns:\n                  TopicArn: !Ref DevOpsGuruTopic"
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkDevopsGuruStackMultiAccRegSpecStacks/DevopsGuruStackSetSpecStacks"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAAE02MTQqDMBCFz9J9HA1F2u4KXqDoCUIyQrTJwGTSLsS7N9FNV9/j/WnYHnfoLk/zTY11a2uJEbZJjF3VMMeXYRNQkNVAMQlnK9UeMVFmi1WXwHnxFHelu9v/18E3ZTcTB1MrUPrH94Syq0gOYUntR/dwLcMled9wjuIDwnjyB7YBcXqhAAAA"
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkDevopsGuruStackMultiAccRegSpecStacks/CDKMetadata/Default"
+      },
+      "Condition": "CDKMetadataAvailable"
+    }
+  },
+  "Conditions": {
+    "CDKMetadataAvailable": {
+      "Fn::Or": [
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "af-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ca-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-northwest-1"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-3"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "me-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "sa-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-2"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-2"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1945 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Construct",
+          "version": "1.98.0"
+        }
+      },
+      "CdkStackSetAdminRole": {
+        "id": "CdkStackSetAdminRole",
+        "path": "CdkStackSetAdminRole",
+        "children": {
+          "AdminRole": {
+            "id": "AdminRole",
+            "path": "CdkStackSetAdminRole/AdminRole",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkStackSetAdminRole/AdminRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "cloudformation.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "path": "/",
+                    "roleName": "AWSCloudFormationStackSetAdministrationRole"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnRole",
+                  "version": "1.107.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-iam.Role",
+              "version": "1.107.0"
+            }
+          },
+          "AdminPolicy": {
+            "id": "AdminPolicy",
+            "path": "CdkStackSetAdminRole/AdminPolicy",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkStackSetAdminRole/AdminPolicy/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Resource": "arn:*:iam::*:role/AWSCloudFormationStackSetExecutionRole"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "policyName": "AssumeRole-AWSCloudFormationStackSetExecutionRole",
+                    "roles": [
+                      {
+                        "Ref": "AdminRole38563C57"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                  "version": "1.107.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-iam.Policy",
+              "version": "1.107.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "CdkStackSetAdminRole/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "CdkStackSetAdminRole/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.98.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "CdkStackSetAdminRole/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnCondition",
+                  "version": "1.98.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.98.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.98.0"
+        }
+      },
+      "CdkStackSetExecRole": {
+        "id": "CdkStackSetExecRole",
+        "path": "CdkStackSetExecRole",
+        "children": {
+          "AdministratorAccountId": {
+            "id": "AdministratorAccountId",
+            "path": "CdkStackSetExecRole/AdministratorAccountId",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnParameter",
+              "version": "1.98.0"
+            }
+          },
+          "ExecutionRole": {
+            "id": "ExecutionRole",
+            "path": "CdkStackSetExecRole/ExecutionRole",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkStackSetExecRole/ExecutionRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "AWS": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":iam::",
+                                  {
+                                    "Ref": "AdministratorAccountId"
+                                  },
+                                  ":root"
+                                ]
+                              ]
+                            }
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "managedPolicyArns": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/AdministratorAccess"
+                          ]
+                        ]
+                      }
+                    ],
+                    "path": "/",
+                    "roleName": "AWSCloudFormationStackSetExecutionRole"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnRole",
+                  "version": "1.107.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-iam.Role",
+              "version": "1.107.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "CdkStackSetExecRole/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "CdkStackSetExecRole/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.98.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "CdkStackSetExecRole/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnCondition",
+                  "version": "1.98.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.98.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.98.0"
+        }
+      },
+      "CdkDevopsGuruStackMultiAccReg": {
+        "id": "CdkDevopsGuruStackMultiAccReg",
+        "path": "CdkDevopsGuruStackMultiAccReg",
+        "children": {
+          "AdministratorAccountId": {
+            "id": "AdministratorAccountId",
+            "path": "CdkDevopsGuruStackMultiAccReg/AdministratorAccountId",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnParameter",
+              "version": "1.98.0"
+            }
+          },
+          "TargetAccountId": {
+            "id": "TargetAccountId",
+            "path": "CdkDevopsGuruStackMultiAccReg/TargetAccountId",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnParameter",
+              "version": "1.98.0"
+            }
+          },
+          "RegionIds": {
+            "id": "RegionIds",
+            "path": "CdkDevopsGuruStackMultiAccReg/RegionIds",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnParameter",
+              "version": "1.98.0"
+            }
+          },
+          "DevopsGuruStackSet": {
+            "id": "DevopsGuruStackSet",
+            "path": "CdkDevopsGuruStackMultiAccReg/DevopsGuruStackSet",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::CloudFormation::StackSet",
+              "aws:cdk:cloudformation:props": {
+                "permissionModel": "SELF_MANAGED",
+                "stackSetName": "EnableDevOpsGuruStackSetMultiAccReg",
+                "description": "CDK Stack Instance to Enable DevOpsGuru Across multiple accounts and regions",
+                "operationPreferences": {
+                  "failureToleranceCount": 0,
+                  "maxConcurrentCount": 1
+                },
+                "stackInstancesGroup": [
+                  {
+                    "deploymentTargets": {
+                      "accounts": [
+                        {
+                          "Ref": "AdministratorAccountId"
+                        },
+                        {
+                          "Ref": "TargetAccountId"
+                        }
+                      ]
+                    },
+                    "regions": {
+                      "Ref": "RegionIds"
+                    }
+                  }
+                ],
+                "templateBody": "\n        Resources:\n          DevOpsGuruMonitoring:\n            Type: AWS::DevOpsGuru::ResourceCollection\n            Properties:\n              ResourceCollectionFilter:\n                CloudFormation:\n                  StackNames: ['*']\n\n          DevOpsGuruTopic: \n            Type: AWS::SNS::Topic\n            Properties: \n              TopicName: devops-guru-multi-acc\n              Subscription:\n                - Endpoint: abc@xyz.com\n                  Protocol: email\n          \n          DevOpsGuruNotification:\n            Type: AWS::DevOpsGuru::NotificationChannel\n            Properties:\n              Config:\n                Sns:\n                  TopicArn: !Ref DevOpsGuruTopic"
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-cloudformation.CfnStackSet",
+              "version": "1.107.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "CdkDevopsGuruStackMultiAccReg/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "CdkDevopsGuruStackMultiAccReg/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.98.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "CdkDevopsGuruStackMultiAccReg/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnCondition",
+                  "version": "1.98.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.98.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.98.0"
+        }
+      },
+      "CdkDevopsGuruStackMultiAccRegSpecStacks": {
+        "id": "CdkDevopsGuruStackMultiAccRegSpecStacks",
+        "path": "CdkDevopsGuruStackMultiAccRegSpecStacks",
+        "children": {
+          "AdministratorAccountId": {
+            "id": "AdministratorAccountId",
+            "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/AdministratorAccountId",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnParameter",
+              "version": "1.98.0"
+            }
+          },
+          "TargetAccountId": {
+            "id": "TargetAccountId",
+            "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/TargetAccountId",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnParameter",
+              "version": "1.98.0"
+            }
+          },
+          "RegionIds": {
+            "id": "RegionIds",
+            "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/RegionIds",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnParameter",
+              "version": "1.98.0"
+            }
+          },
+          "DevopsGuruStackSetSpecStacks": {
+            "id": "DevopsGuruStackSetSpecStacks",
+            "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/DevopsGuruStackSetSpecStacks",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::CloudFormation::StackSet",
+              "aws:cdk:cloudformation:props": {
+                "permissionModel": "SELF_MANAGED",
+                "stackSetName": "EnableDevOpsGuruStackSetMultiAccRegSpecSacks",
+                "description": "CDK Stack Instance to Enable DevOpsGuru for Specific Stacks",
+                "operationPreferences": {
+                  "failureToleranceCount": 0,
+                  "maxConcurrentCount": 1
+                },
+                "stackInstancesGroup": [
+                  {
+                    "deploymentTargets": {
+                      "accounts": [
+                        {
+                          "Ref": "AdministratorAccountId"
+                        },
+                        {
+                          "Ref": "TargetAccountId"
+                        }
+                      ]
+                    },
+                    "regions": {
+                      "Ref": "RegionIds"
+                    }
+                  }
+                ],
+                "templateBody": "\n        Resources:\n          DevOpsGuruMonitoring:\n            Type: AWS::DevOpsGuru::ResourceCollection\n            Properties:\n              ResourceCollectionFilter:\n                CloudFormation:\n                  StackNames: ['CdkInfrastructureStack']\n\n          DevOpsGuruTopic: \n            Type: AWS::SNS::Topic\n            Properties: \n              TopicName: devops-guru-spec-stack\n              Subscription:\n                - Endpoint: abc@xyz.com\n                  Protocol: email\n          \n          DevOpsGuruNotification:\n            Type: AWS::DevOpsGuru::NotificationChannel\n            Properties:\n              Config:\n                Sns:\n                  TopicArn: !Ref DevOpsGuruTopic"
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-cloudformation.CfnStackSet",
+              "version": "1.107.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.98.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnCondition",
+                  "version": "1.98.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.98.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.98.0"
+        }
+      },
+      "CdkDevopsguruStackOrgUnit": {
+        "id": "CdkDevopsguruStackOrgUnit",
+        "path": "CdkDevopsguruStackOrgUnit",
+        "children": {
+          "OrganizationalUnitIds": {
+            "id": "OrganizationalUnitIds",
+            "path": "CdkDevopsguruStackOrgUnit/OrganizationalUnitIds",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnParameter",
+              "version": "1.98.0"
+            }
+          },
+          "RegionIds": {
+            "id": "RegionIds",
+            "path": "CdkDevopsguruStackOrgUnit/RegionIds",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnParameter",
+              "version": "1.98.0"
+            }
+          },
+          "DevopsGuruStackSet": {
+            "id": "DevopsGuruStackSet",
+            "path": "CdkDevopsguruStackOrgUnit/DevopsGuruStackSet",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::CloudFormation::StackSet",
+              "aws:cdk:cloudformation:props": {
+                "permissionModel": "SERVICE_MANAGED",
+                "stackSetName": "EnableDevOpsGuruStackSetOrgUni",
+                "autoDeployment": {
+                  "enabled": true,
+                  "retainStacksOnAccountRemoval": true
+                },
+                "description": "CDK Stack Instance to Enable DevOpsGuru across Organization Units",
+                "operationPreferences": {
+                  "failureToleranceCount": 0,
+                  "maxConcurrentCount": 1
+                },
+                "stackInstancesGroup": [
+                  {
+                    "regions": {
+                      "Ref": "RegionIds"
+                    },
+                    "deploymentTargets": {
+                      "organizationalUnitIds": {
+                        "Ref": "OrganizationalUnitIds"
+                      }
+                    }
+                  }
+                ],
+                "templateBody": "\n        Resources:\n          DevOpsGuruMonitoring:\n            Type: AWS::DevOpsGuru::ResourceCollection\n            Properties:\n              ResourceCollectionFilter:\n                CloudFormation:\n                  StackNames: ['*']\n\n          DevOpsGuruTopic: \n            Type: AWS::SNS::Topic\n            Properties: \n              TopicName: devops-guru-ou\n              Subscription:\n                - Endpoint: abc@xyz.com\n                  Protocol: email\n          \n          DevOpsGuruNotification:\n            Type: AWS::DevOpsGuru::NotificationChannel\n            Properties:\n              Config:\n                Sns:\n                  TopicArn: !Ref DevOpsGuruTopic"
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-cloudformation.CfnStackSet",
+              "version": "1.107.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "CdkDevopsguruStackOrgUnit/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "CdkDevopsguruStackOrgUnit/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.98.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "CdkDevopsguruStackOrgUnit/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnCondition",
+                  "version": "1.98.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.98.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.98.0"
+        }
+      },
+      "CdkInfrastructureStack": {
+        "id": "CdkInfrastructureStack",
+        "path": "CdkInfrastructureStack",
+        "children": {
+          "DdbTable": {
+            "id": "DdbTable",
+            "path": "CdkInfrastructureStack/DdbTable",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkInfrastructureStack/DdbTable/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "keySchema": [
+                      {
+                        "attributeName": "name",
+                        "keyType": "HASH"
+                      }
+                    ],
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "name",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "provisionedThroughput": {
+                      "readCapacityUnits": 1,
+                      "writeCapacityUnits": 5
+                    },
+                    "tableName": "DdbTable"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-dynamodb.CfnTable",
+                  "version": "1.107.0"
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "CdkInfrastructureStack/DdbTable/ScalingRole",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Resource",
+                  "version": "1.98.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-dynamodb.Table",
+              "version": "1.107.0"
+            }
+          },
+          "LambdaExecutionRole": {
+            "id": "LambdaExecutionRole",
+            "path": "CdkInfrastructureStack/LambdaExecutionRole",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkInfrastructureStack/LambdaExecutionRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnRole",
+                  "version": "1.107.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-iam.Role",
+              "version": "1.107.0"
+            }
+          },
+          "CreateFunctionMonitorOperator": {
+            "id": "CreateFunctionMonitorOperator",
+            "path": "CdkInfrastructureStack/CreateFunctionMonitorOperator",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkInfrastructureStack/CreateFunctionMonitorOperator/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "zipFile": "'use strict';\n        const AWS = require('aws-sdk');\n        const docClient = new AWS.DynamoDB.DocumentClient();\n        const tableName = process.env.TABLE_NAME;\n        exports.lambda_handler = (event, context, callback) => {\n          console.log('Received event:', JSON.stringify(event, null, 2));\n          const shop = create_shop_struct(event);\n          var params = {\n            TableName: tableName,\n            Item: {\n              name: shop.name,\n              specialty: shop.specialty,\n              address: shop.address,\n              url: shop.url,\n              description: shop.description\n            }\n          };\n          docClient.put(params, function(err, data) {\n            if (err) callback(err)\n            callback(null, {\n              statusCode: 200,\n              body: JSON.stringify(shop)\n            });\n          });\n        };\n        \n        var create_shop_struct = function(event) {\n          const body = JSON.parse(event.body);\n        \n          return {\n            name: body.name,\n            specialty: body.specialty,\n            address: body.address,\n            url: body.url,\n            description: body.description\n          };\n        };\n        "
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "LambdaExecutionRoleD5C26073",
+                        "Arn"
+                      ]
+                    },
+                    "environment": {
+                      "variables": {
+                        "TABLE_NAME": {
+                          "Ref": "DdbTable28A7E8F5"
+                        }
+                      }
+                    },
+                    "functionName": "CreateFunctionMonitorOperator",
+                    "handler": "index.handler",
+                    "runtime": "nodejs12.x"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnFunction",
+                  "version": "1.107.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-lambda.Function",
+              "version": "1.107.0"
+            }
+          },
+          "ListLambdaRole": {
+            "id": "ListLambdaRole",
+            "path": "CdkInfrastructureStack/ListLambdaRole",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkInfrastructureStack/ListLambdaRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "managedPolicyArns": [
+                      "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnRole",
+                  "version": "1.107.0"
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "CdkInfrastructureStack/ListLambdaRole/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkInfrastructureStack/ListLambdaRole/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "dynamodb:BatchGetItem",
+                                "dynamodb:GetRecords",
+                                "dynamodb:GetShardIterator",
+                                "dynamodb:Query",
+                                "dynamodb:GetItem",
+                                "dynamodb:Scan",
+                                "dynamodb:BatchWriteItem",
+                                "dynamodb:PutItem",
+                                "dynamodb:UpdateItem",
+                                "dynamodb:DeleteItem"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "*"
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "ListLambdaRoleDefaultPolicy47F23E4A",
+                        "roles": [
+                          {
+                            "Ref": "ListLambdaRole0ACD01C2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                      "version": "1.107.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Policy",
+                  "version": "1.107.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-iam.Role",
+              "version": "1.107.0"
+            }
+          },
+          "ScanLambdaRole": {
+            "id": "ScanLambdaRole",
+            "path": "CdkInfrastructureStack/ScanLambdaRole",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkInfrastructureStack/ScanLambdaRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "managedPolicyArns": [
+                      "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnRole",
+                  "version": "1.107.0"
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "CdkInfrastructureStack/ScanLambdaRole/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkInfrastructureStack/ScanLambdaRole/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "dynamodb:BatchGetItem",
+                                "dynamodb:GetRecords",
+                                "dynamodb:GetShardIterator",
+                                "dynamodb:Query",
+                                "dynamodb:Scan",
+                                "dynamodb:GetItem"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "*"
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "ScanLambdaRoleDefaultPolicyFFA00BE6",
+                        "roles": [
+                          {
+                            "Ref": "ScanLambdaRole782038F2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                      "version": "1.107.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Policy",
+                  "version": "1.107.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-iam.Role",
+              "version": "1.107.0"
+            }
+          },
+          "ScanFunctionMonitorOperator": {
+            "id": "ScanFunctionMonitorOperator",
+            "path": "CdkInfrastructureStack/ScanFunctionMonitorOperator",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkInfrastructureStack/ScanFunctionMonitorOperator/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "zipFile": "'use strict';\n      const AWS = require('aws-sdk');\n      const docClient = new AWS.DynamoDB.DocumentClient();\n      const tableName = process.env.TABLE_NAME;\n      exports.lambda_handler = (event, context, callback) => {\n        console.log('Received event:', JSON.stringify(event, null, 2));\n        var params = {\n          TableName: tableName\n        };\n        docClient.scan(params, function(err, data) {\n          if (err) callback(err)\n          callback(null, {\n            statusCode: 200,\n            body: JSON.stringify(data.Items)\n          });\n        });\n      };"
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "ScanLambdaRole782038F2",
+                        "Arn"
+                      ]
+                    },
+                    "environment": {
+                      "variables": {
+                        "TABLE_NAME": {
+                          "Ref": "DdbTable28A7E8F5"
+                        }
+                      }
+                    },
+                    "functionName": "ScanFunctionMonitorOperator",
+                    "handler": "index.lambda_handler",
+                    "runtime": "nodejs12.x"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnFunction",
+                  "version": "1.107.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-lambda.Function",
+              "version": "1.107.0"
+            }
+          },
+          "CreateRestApiMonitorOperator": {
+            "id": "CreateRestApiMonitorOperator",
+            "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "Create Rest API",
+                    "endpointConfiguration": {
+                      "types": [
+                        "REGIONAL"
+                      ]
+                    },
+                    "name": "CreateRestApiMonitorOperator"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigateway.CfnRestApi",
+                  "version": "1.107.0"
+                }
+              },
+              "CloudWatchRole": {
+                "id": "CloudWatchRole",
+                "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/CloudWatchRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/CloudWatchRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "apigateway.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.107.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.107.0"
+                }
+              },
+              "Account": {
+                "id": "Account",
+                "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Account",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Account",
+                  "aws:cdk:cloudformation:props": {
+                    "cloudWatchRoleArn": {
+                      "Fn::GetAtt": [
+                        "CreateRestApiMonitorOperatorCloudWatchRoleB8EBFD97",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigateway.CfnAccount",
+                  "version": "1.107.0"
+                }
+              },
+              "Deployment": {
+                "id": "Deployment",
+                "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Deployment",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Deployment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "CreateRestApiMonitorOperator07E4009D"
+                        },
+                        "description": "Automatically created by the RestApi construct"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigateway.CfnDeployment",
+                      "version": "1.107.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigateway.Deployment",
+                  "version": "1.107.0"
+                }
+              },
+              "DeploymentStage.prod": {
+                "id": "DeploymentStage.prod",
+                "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/DeploymentStage.prod",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/DeploymentStage.prod/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "CreateRestApiMonitorOperator07E4009D"
+                        },
+                        "deploymentId": {
+                          "Ref": "CreateRestApiMonitorOperatorDeploymentAD8A20FF017fd01da1b787e3de19586e1c14623e"
+                        },
+                        "methodSettings": [
+                          {
+                            "httpMethod": "*",
+                            "resourcePath": "/*",
+                            "dataTraceEnabled": true,
+                            "loggingLevel": "INFO"
+                          }
+                        ],
+                        "stageName": "prod"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigateway.CfnStage",
+                      "version": "1.107.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigateway.Stage",
+                  "version": "1.107.0"
+                }
+              },
+              "Endpoint": {
+                "id": "Endpoint",
+                "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Endpoint",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnOutput",
+                  "version": "1.98.0"
+                }
+              },
+              "Default": {
+                "id": "Default",
+                "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Default",
+                "children": {
+                  "ANY": {
+                    "id": "ANY",
+                    "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Default/ANY",
+                    "children": {
+                      "ApiPermission.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..": {
+                        "id": "ApiPermission.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..",
+                        "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Default/ANY/ApiPermission.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                          "aws:cdk:cloudformation:props": {
+                            "action": "lambda:InvokeFunction",
+                            "functionName": {
+                              "Fn::GetAtt": [
+                                "CreateFunctionMonitorOperator0C65E561",
+                                "Arn"
+                              ]
+                            },
+                            "principal": "apigateway.amazonaws.com",
+                            "sourceArn": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":execute-api:",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "AWS::AccountId"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "CreateRestApiMonitorOperator07E4009D"
+                                  },
+                                  "/",
+                                  {
+                                    "Ref": "CreateRestApiMonitorOperatorDeploymentStageprodF9BD10D8"
+                                  },
+                                  "/*/"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                          "version": "1.107.0"
+                        }
+                      },
+                      "ApiPermission.Test.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..": {
+                        "id": "ApiPermission.Test.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..",
+                        "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Default/ANY/ApiPermission.Test.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                          "aws:cdk:cloudformation:props": {
+                            "action": "lambda:InvokeFunction",
+                            "functionName": {
+                              "Fn::GetAtt": [
+                                "CreateFunctionMonitorOperator0C65E561",
+                                "Arn"
+                              ]
+                            },
+                            "principal": "apigateway.amazonaws.com",
+                            "sourceArn": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":execute-api:",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "AWS::AccountId"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "CreateRestApiMonitorOperator07E4009D"
+                                  },
+                                  "/test-invoke-stage/*/"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                          "version": "1.107.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Default/ANY/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                          "aws:cdk:cloudformation:props": {
+                            "httpMethod": "ANY",
+                            "resourceId": {
+                              "Fn::GetAtt": [
+                                "CreateRestApiMonitorOperator07E4009D",
+                                "RootResourceId"
+                              ]
+                            },
+                            "restApiId": {
+                              "Ref": "CreateRestApiMonitorOperator07E4009D"
+                            },
+                            "authorizationType": "NONE",
+                            "integration": {
+                              "type": "AWS_PROXY",
+                              "uri": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":apigateway:",
+                                    {
+                                      "Ref": "AWS::Region"
+                                    },
+                                    ":lambda:path/2015-03-31/functions/",
+                                    {
+                                      "Fn::GetAtt": [
+                                        "CreateFunctionMonitorOperator0C65E561",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "/invocations"
+                                  ]
+                                ]
+                              },
+                              "integrationHttpMethod": "POST"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-apigateway.CfnMethod",
+                          "version": "1.107.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigateway.Method",
+                      "version": "1.107.0"
+                    }
+                  },
+                  "{proxy+}": {
+                    "id": "{proxy+}",
+                    "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Default/{proxy+}",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Default/{proxy+}/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                          "aws:cdk:cloudformation:props": {
+                            "parentId": {
+                              "Fn::GetAtt": [
+                                "CreateRestApiMonitorOperator07E4009D",
+                                "RootResourceId"
+                              ]
+                            },
+                            "pathPart": "{proxy+}",
+                            "restApiId": {
+                              "Ref": "CreateRestApiMonitorOperator07E4009D"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-apigateway.CfnResource",
+                          "version": "1.107.0"
+                        }
+                      },
+                      "ANY": {
+                        "id": "ANY",
+                        "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Default/{proxy+}/ANY",
+                        "children": {
+                          "ApiPermission.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..{proxy+}": {
+                            "id": "ApiPermission.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..{proxy+}",
+                            "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Default/{proxy+}/ANY/ApiPermission.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..{proxy+}",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "CreateFunctionMonitorOperator0C65E561",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "CreateRestApiMonitorOperator07E4009D"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "CreateRestApiMonitorOperatorDeploymentStageprodF9BD10D8"
+                                      },
+                                      "/*/*"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                              "version": "1.107.0"
+                            }
+                          },
+                          "ApiPermission.Test.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..{proxy+}": {
+                            "id": "ApiPermission.Test.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..{proxy+}",
+                            "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Default/{proxy+}/ANY/ApiPermission.Test.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..{proxy+}",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "CreateFunctionMonitorOperator0C65E561",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "CreateRestApiMonitorOperator07E4009D"
+                                      },
+                                      "/test-invoke-stage/*/*"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                              "version": "1.107.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Default/{proxy+}/ANY/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "httpMethod": "ANY",
+                                "resourceId": {
+                                  "Ref": "CreateRestApiMonitorOperatorproxy435068DB"
+                                },
+                                "restApiId": {
+                                  "Ref": "CreateRestApiMonitorOperator07E4009D"
+                                },
+                                "authorizationType": "NONE",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":apigateway:",
+                                        {
+                                          "Ref": "AWS::Region"
+                                        },
+                                        ":lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "CreateFunctionMonitorOperator0C65E561",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-apigateway.CfnMethod",
+                              "version": "1.107.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-apigateway.Method",
+                          "version": "1.107.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigateway.Resource",
+                      "version": "1.107.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigateway.ResourceBase",
+                  "version": "1.107.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-apigateway.LambdaRestApi",
+              "version": "1.107.0"
+            }
+          },
+          "ListRestApiMonitorOperator": {
+            "id": "ListRestApiMonitorOperator",
+            "path": "CdkInfrastructureStack/ListRestApiMonitorOperator",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "List Rest API",
+                    "endpointConfiguration": {
+                      "types": [
+                        "REGIONAL"
+                      ]
+                    },
+                    "name": "ListRestApiMonitorOperator"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigateway.CfnRestApi",
+                  "version": "1.107.0"
+                }
+              },
+              "CloudWatchRole": {
+                "id": "CloudWatchRole",
+                "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/CloudWatchRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/CloudWatchRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "apigateway.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.107.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.107.0"
+                }
+              },
+              "Account": {
+                "id": "Account",
+                "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Account",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Account",
+                  "aws:cdk:cloudformation:props": {
+                    "cloudWatchRoleArn": {
+                      "Fn::GetAtt": [
+                        "ListRestApiMonitorOperatorCloudWatchRole361218EB",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigateway.CfnAccount",
+                  "version": "1.107.0"
+                }
+              },
+              "Deployment": {
+                "id": "Deployment",
+                "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Deployment",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Deployment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "ListRestApiMonitorOperator9624C308"
+                        },
+                        "description": "Automatically created by the RestApi construct"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigateway.CfnDeployment",
+                      "version": "1.107.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigateway.Deployment",
+                  "version": "1.107.0"
+                }
+              },
+              "DeploymentStage.prod": {
+                "id": "DeploymentStage.prod",
+                "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/DeploymentStage.prod",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/DeploymentStage.prod/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "ListRestApiMonitorOperator9624C308"
+                        },
+                        "deploymentId": {
+                          "Ref": "ListRestApiMonitorOperatorDeployment82153E0C868dc484f2ca0fc1379f9e6ee3c7e7cd"
+                        },
+                        "methodSettings": [
+                          {
+                            "httpMethod": "*",
+                            "resourcePath": "/*",
+                            "dataTraceEnabled": true,
+                            "loggingLevel": "INFO"
+                          }
+                        ],
+                        "stageName": "prod"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigateway.CfnStage",
+                      "version": "1.107.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigateway.Stage",
+                  "version": "1.107.0"
+                }
+              },
+              "Endpoint": {
+                "id": "Endpoint",
+                "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Endpoint",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnOutput",
+                  "version": "1.98.0"
+                }
+              },
+              "Default": {
+                "id": "Default",
+                "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Default",
+                "children": {
+                  "ANY": {
+                    "id": "ANY",
+                    "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Default/ANY",
+                    "children": {
+                      "ApiPermission.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..": {
+                        "id": "ApiPermission.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..",
+                        "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Default/ANY/ApiPermission.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                          "aws:cdk:cloudformation:props": {
+                            "action": "lambda:InvokeFunction",
+                            "functionName": {
+                              "Fn::GetAtt": [
+                                "ScanFunctionMonitorOperatorF0675051",
+                                "Arn"
+                              ]
+                            },
+                            "principal": "apigateway.amazonaws.com",
+                            "sourceArn": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":execute-api:",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "AWS::AccountId"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "ListRestApiMonitorOperator9624C308"
+                                  },
+                                  "/",
+                                  {
+                                    "Ref": "ListRestApiMonitorOperatorDeploymentStageprod8BAF59E8"
+                                  },
+                                  "/*/"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                          "version": "1.107.0"
+                        }
+                      },
+                      "ApiPermission.Test.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..": {
+                        "id": "ApiPermission.Test.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..",
+                        "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Default/ANY/ApiPermission.Test.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                          "aws:cdk:cloudformation:props": {
+                            "action": "lambda:InvokeFunction",
+                            "functionName": {
+                              "Fn::GetAtt": [
+                                "ScanFunctionMonitorOperatorF0675051",
+                                "Arn"
+                              ]
+                            },
+                            "principal": "apigateway.amazonaws.com",
+                            "sourceArn": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":execute-api:",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "AWS::AccountId"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "ListRestApiMonitorOperator9624C308"
+                                  },
+                                  "/test-invoke-stage/*/"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                          "version": "1.107.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Default/ANY/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                          "aws:cdk:cloudformation:props": {
+                            "httpMethod": "ANY",
+                            "resourceId": {
+                              "Fn::GetAtt": [
+                                "ListRestApiMonitorOperator9624C308",
+                                "RootResourceId"
+                              ]
+                            },
+                            "restApiId": {
+                              "Ref": "ListRestApiMonitorOperator9624C308"
+                            },
+                            "authorizationType": "NONE",
+                            "integration": {
+                              "type": "AWS_PROXY",
+                              "uri": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":apigateway:",
+                                    {
+                                      "Ref": "AWS::Region"
+                                    },
+                                    ":lambda:path/2015-03-31/functions/",
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ScanFunctionMonitorOperatorF0675051",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "/invocations"
+                                  ]
+                                ]
+                              },
+                              "integrationHttpMethod": "POST"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-apigateway.CfnMethod",
+                          "version": "1.107.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigateway.Method",
+                      "version": "1.107.0"
+                    }
+                  },
+                  "{proxy+}": {
+                    "id": "{proxy+}",
+                    "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Default/{proxy+}",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Default/{proxy+}/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                          "aws:cdk:cloudformation:props": {
+                            "parentId": {
+                              "Fn::GetAtt": [
+                                "ListRestApiMonitorOperator9624C308",
+                                "RootResourceId"
+                              ]
+                            },
+                            "pathPart": "{proxy+}",
+                            "restApiId": {
+                              "Ref": "ListRestApiMonitorOperator9624C308"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-apigateway.CfnResource",
+                          "version": "1.107.0"
+                        }
+                      },
+                      "ANY": {
+                        "id": "ANY",
+                        "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Default/{proxy+}/ANY",
+                        "children": {
+                          "ApiPermission.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..{proxy+}": {
+                            "id": "ApiPermission.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..{proxy+}",
+                            "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Default/{proxy+}/ANY/ApiPermission.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..{proxy+}",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ScanFunctionMonitorOperatorF0675051",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "ListRestApiMonitorOperator9624C308"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "ListRestApiMonitorOperatorDeploymentStageprod8BAF59E8"
+                                      },
+                                      "/*/*"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                              "version": "1.107.0"
+                            }
+                          },
+                          "ApiPermission.Test.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..{proxy+}": {
+                            "id": "ApiPermission.Test.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..{proxy+}",
+                            "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Default/{proxy+}/ANY/ApiPermission.Test.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..{proxy+}",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ScanFunctionMonitorOperatorF0675051",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "ListRestApiMonitorOperator9624C308"
+                                      },
+                                      "/test-invoke-stage/*/*"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                              "version": "1.107.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Default/{proxy+}/ANY/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "httpMethod": "ANY",
+                                "resourceId": {
+                                  "Ref": "ListRestApiMonitorOperatorproxy8B7B72AF"
+                                },
+                                "restApiId": {
+                                  "Ref": "ListRestApiMonitorOperator9624C308"
+                                },
+                                "authorizationType": "NONE",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":apigateway:",
+                                        {
+                                          "Ref": "AWS::Region"
+                                        },
+                                        ":lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ScanFunctionMonitorOperatorF0675051",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-apigateway.CfnMethod",
+                              "version": "1.107.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-apigateway.Method",
+                          "version": "1.107.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigateway.Resource",
+                      "version": "1.107.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigateway.ResourceBase",
+                  "version": "1.107.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-apigateway.LambdaRestApi",
+              "version": "1.107.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "CdkInfrastructureStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "CdkInfrastructureStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.98.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "CdkInfrastructureStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnCondition",
+                  "version": "1.98.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.98.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.98.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "@aws-cdk/core.App",
+      "version": "1.98.0"
+    }
+  }
+}
