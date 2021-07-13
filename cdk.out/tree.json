@@ -9,7 +9,7 @@
         "path": "Tree",
         "constructInfo": {
           "fqn": "@aws-cdk/core.Construct",
-          "version": "1.98.0"
+          "version": "1.113.0"
         }
       },
       "CdkStackSetAdminRole": {
@@ -44,13 +44,13 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.CfnRole",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-iam.Role",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "AdminPolicy": {
@@ -83,13 +83,13 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.CfnPolicy",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-iam.Policy",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "CDKMetadata": {
@@ -101,7 +101,7 @@
                 "path": "CdkStackSetAdminRole/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnResource",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               },
               "Condition": {
@@ -109,19 +109,19 @@
                 "path": "CdkStackSetAdminRole/CDKMetadata/Condition",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnCondition",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/core.Construct",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           }
         },
         "constructInfo": {
           "fqn": "@aws-cdk/core.Stack",
-          "version": "1.98.0"
+          "version": "1.113.0"
         }
       },
       "CdkStackSetExecRole": {
@@ -133,7 +133,7 @@
             "path": "CdkStackSetExecRole/AdministratorAccountId",
             "constructInfo": {
               "fqn": "@aws-cdk/core.CfnParameter",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           },
           "ExecutionRole": {
@@ -193,13 +193,13 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.CfnRole",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-iam.Role",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "CDKMetadata": {
@@ -211,7 +211,7 @@
                 "path": "CdkStackSetExecRole/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnResource",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               },
               "Condition": {
@@ -219,19 +219,19 @@
                 "path": "CdkStackSetExecRole/CDKMetadata/Condition",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnCondition",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/core.Construct",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           }
         },
         "constructInfo": {
           "fqn": "@aws-cdk/core.Stack",
-          "version": "1.98.0"
+          "version": "1.113.0"
         }
       },
       "CdkDevopsGuruStackMultiAccReg": {
@@ -243,7 +243,7 @@
             "path": "CdkDevopsGuruStackMultiAccReg/AdministratorAccountId",
             "constructInfo": {
               "fqn": "@aws-cdk/core.CfnParameter",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           },
           "TargetAccountId": {
@@ -251,7 +251,7 @@
             "path": "CdkDevopsGuruStackMultiAccReg/TargetAccountId",
             "constructInfo": {
               "fqn": "@aws-cdk/core.CfnParameter",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           },
           "RegionIds": {
@@ -259,7 +259,7 @@
             "path": "CdkDevopsGuruStackMultiAccReg/RegionIds",
             "constructInfo": {
               "fqn": "@aws-cdk/core.CfnParameter",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           },
           "DevopsGuruStackSet": {
@@ -297,7 +297,7 @@
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-cloudformation.CfnStackSet",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "CDKMetadata": {
@@ -309,7 +309,7 @@
                 "path": "CdkDevopsGuruStackMultiAccReg/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnResource",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               },
               "Condition": {
@@ -317,19 +317,19 @@
                 "path": "CdkDevopsGuruStackMultiAccReg/CDKMetadata/Condition",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnCondition",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/core.Construct",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           }
         },
         "constructInfo": {
           "fqn": "@aws-cdk/core.Stack",
-          "version": "1.98.0"
+          "version": "1.113.0"
         }
       },
       "CdkDevopsGuruStackMultiAccRegSpecStacks": {
@@ -341,7 +341,7 @@
             "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/AdministratorAccountId",
             "constructInfo": {
               "fqn": "@aws-cdk/core.CfnParameter",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           },
           "TargetAccountId": {
@@ -349,7 +349,7 @@
             "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/TargetAccountId",
             "constructInfo": {
               "fqn": "@aws-cdk/core.CfnParameter",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           },
           "RegionIds": {
@@ -357,7 +357,7 @@
             "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/RegionIds",
             "constructInfo": {
               "fqn": "@aws-cdk/core.CfnParameter",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           },
           "DevopsGuruStackSetSpecStacks": {
@@ -395,7 +395,7 @@
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-cloudformation.CfnStackSet",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "CDKMetadata": {
@@ -407,7 +407,7 @@
                 "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnResource",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               },
               "Condition": {
@@ -415,19 +415,19 @@
                 "path": "CdkDevopsGuruStackMultiAccRegSpecStacks/CDKMetadata/Condition",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnCondition",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/core.Construct",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           }
         },
         "constructInfo": {
           "fqn": "@aws-cdk/core.Stack",
-          "version": "1.98.0"
+          "version": "1.113.0"
         }
       },
       "CdkDevopsguruStackOrgUnit": {
@@ -439,7 +439,7 @@
             "path": "CdkDevopsguruStackOrgUnit/OrganizationalUnitIds",
             "constructInfo": {
               "fqn": "@aws-cdk/core.CfnParameter",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           },
           "RegionIds": {
@@ -447,7 +447,7 @@
             "path": "CdkDevopsguruStackOrgUnit/RegionIds",
             "constructInfo": {
               "fqn": "@aws-cdk/core.CfnParameter",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           },
           "DevopsGuruStackSet": {
@@ -484,7 +484,7 @@
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-cloudformation.CfnStackSet",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "CDKMetadata": {
@@ -496,7 +496,7 @@
                 "path": "CdkDevopsguruStackOrgUnit/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnResource",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               },
               "Condition": {
@@ -504,19 +504,19 @@
                 "path": "CdkDevopsguruStackOrgUnit/CDKMetadata/Condition",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnCondition",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/core.Construct",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           }
         },
         "constructInfo": {
           "fqn": "@aws-cdk/core.Stack",
-          "version": "1.98.0"
+          "version": "1.113.0"
         }
       },
       "CdkInfrastructureStack": {
@@ -554,7 +554,7 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-dynamodb.CfnTable",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "ScalingRole": {
@@ -562,13 +562,13 @@
                 "path": "CdkInfrastructureStack/DdbTable/ScalingRole",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.Resource",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-dynamodb.Table",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "LambdaExecutionRole": {
@@ -597,13 +597,13 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.CfnRole",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-iam.Role",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "CreateFunctionMonitorOperator": {
@@ -639,13 +639,13 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-lambda.CfnFunction",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-lambda.Function",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "ListLambdaRole": {
@@ -677,7 +677,7 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.CfnRole",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "DefaultPolicy": {
@@ -721,19 +721,19 @@
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-iam.CfnPolicy",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.Policy",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-iam.Role",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "ScanLambdaRole": {
@@ -765,7 +765,7 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.CfnRole",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "DefaultPolicy": {
@@ -805,19 +805,19 @@
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-iam.CfnPolicy",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.Policy",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-iam.Role",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "ScanFunctionMonitorOperator": {
@@ -853,13 +853,13 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-lambda.CfnFunction",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-lambda.Function",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "CreateRestApiMonitorOperator": {
@@ -883,7 +883,7 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-apigateway.CfnRestApi",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "CloudWatchRole": {
@@ -926,13 +926,13 @@
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-iam.CfnRole",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.Role",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "Account": {
@@ -951,7 +951,7 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-apigateway.CfnAccount",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "Deployment": {
@@ -972,13 +972,13 @@
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-apigateway.CfnDeployment",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-apigateway.Deployment",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "DeploymentStage.prod": {
@@ -1010,13 +1010,13 @@
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-apigateway.CfnStage",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-apigateway.Stage",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "Endpoint": {
@@ -1024,7 +1024,7 @@
                 "path": "CdkInfrastructureStack/CreateRestApiMonitorOperator/Endpoint",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnOutput",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               },
               "Default": {
@@ -1081,7 +1081,7 @@
                         },
                         "constructInfo": {
                           "fqn": "@aws-cdk/aws-lambda.CfnPermission",
-                          "version": "1.107.0"
+                          "version": "1.113.0"
                         }
                       },
                       "ApiPermission.Test.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..": {
@@ -1126,7 +1126,7 @@
                         },
                         "constructInfo": {
                           "fqn": "@aws-cdk/aws-lambda.CfnPermission",
-                          "version": "1.107.0"
+                          "version": "1.113.0"
                         }
                       },
                       "Resource": {
@@ -1177,13 +1177,13 @@
                         },
                         "constructInfo": {
                           "fqn": "@aws-cdk/aws-apigateway.CfnMethod",
-                          "version": "1.107.0"
+                          "version": "1.113.0"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-apigateway.Method",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   },
                   "{proxy+}": {
@@ -1210,7 +1210,7 @@
                         },
                         "constructInfo": {
                           "fqn": "@aws-cdk/aws-apigateway.CfnResource",
-                          "version": "1.107.0"
+                          "version": "1.113.0"
                         }
                       },
                       "ANY": {
@@ -1263,7 +1263,7 @@
                             },
                             "constructInfo": {
                               "fqn": "@aws-cdk/aws-lambda.CfnPermission",
-                              "version": "1.107.0"
+                              "version": "1.113.0"
                             }
                           },
                           "ApiPermission.Test.CdkInfrastructureStackCreateRestApiMonitorOperatorDA708AD1.ANY..{proxy+}": {
@@ -1308,7 +1308,7 @@
                             },
                             "constructInfo": {
                               "fqn": "@aws-cdk/aws-lambda.CfnPermission",
-                              "version": "1.107.0"
+                              "version": "1.113.0"
                             }
                           },
                           "Resource": {
@@ -1356,31 +1356,31 @@
                             },
                             "constructInfo": {
                               "fqn": "@aws-cdk/aws-apigateway.CfnMethod",
-                              "version": "1.107.0"
+                              "version": "1.113.0"
                             }
                           }
                         },
                         "constructInfo": {
                           "fqn": "@aws-cdk/aws-apigateway.Method",
-                          "version": "1.107.0"
+                          "version": "1.113.0"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-apigateway.Resource",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-apigateway.ResourceBase",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-apigateway.LambdaRestApi",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "ListRestApiMonitorOperator": {
@@ -1404,7 +1404,7 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-apigateway.CfnRestApi",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "CloudWatchRole": {
@@ -1447,13 +1447,13 @@
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-iam.CfnRole",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.Role",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "Account": {
@@ -1472,7 +1472,7 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-apigateway.CfnAccount",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "Deployment": {
@@ -1493,13 +1493,13 @@
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-apigateway.CfnDeployment",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-apigateway.Deployment",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "DeploymentStage.prod": {
@@ -1531,13 +1531,13 @@
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-apigateway.CfnStage",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-apigateway.Stage",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               },
               "Endpoint": {
@@ -1545,7 +1545,7 @@
                 "path": "CdkInfrastructureStack/ListRestApiMonitorOperator/Endpoint",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnOutput",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               },
               "Default": {
@@ -1602,7 +1602,7 @@
                         },
                         "constructInfo": {
                           "fqn": "@aws-cdk/aws-lambda.CfnPermission",
-                          "version": "1.107.0"
+                          "version": "1.113.0"
                         }
                       },
                       "ApiPermission.Test.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..": {
@@ -1647,7 +1647,7 @@
                         },
                         "constructInfo": {
                           "fqn": "@aws-cdk/aws-lambda.CfnPermission",
-                          "version": "1.107.0"
+                          "version": "1.113.0"
                         }
                       },
                       "Resource": {
@@ -1698,13 +1698,13 @@
                         },
                         "constructInfo": {
                           "fqn": "@aws-cdk/aws-apigateway.CfnMethod",
-                          "version": "1.107.0"
+                          "version": "1.113.0"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-apigateway.Method",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   },
                   "{proxy+}": {
@@ -1731,7 +1731,7 @@
                         },
                         "constructInfo": {
                           "fqn": "@aws-cdk/aws-apigateway.CfnResource",
-                          "version": "1.107.0"
+                          "version": "1.113.0"
                         }
                       },
                       "ANY": {
@@ -1784,7 +1784,7 @@
                             },
                             "constructInfo": {
                               "fqn": "@aws-cdk/aws-lambda.CfnPermission",
-                              "version": "1.107.0"
+                              "version": "1.113.0"
                             }
                           },
                           "ApiPermission.Test.CdkInfrastructureStackListRestApiMonitorOperatorE991DAD3.ANY..{proxy+}": {
@@ -1829,7 +1829,7 @@
                             },
                             "constructInfo": {
                               "fqn": "@aws-cdk/aws-lambda.CfnPermission",
-                              "version": "1.107.0"
+                              "version": "1.113.0"
                             }
                           },
                           "Resource": {
@@ -1877,31 +1877,31 @@
                             },
                             "constructInfo": {
                               "fqn": "@aws-cdk/aws-apigateway.CfnMethod",
-                              "version": "1.107.0"
+                              "version": "1.113.0"
                             }
                           }
                         },
                         "constructInfo": {
                           "fqn": "@aws-cdk/aws-apigateway.Method",
-                          "version": "1.107.0"
+                          "version": "1.113.0"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "@aws-cdk/aws-apigateway.Resource",
-                      "version": "1.107.0"
+                      "version": "1.113.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-apigateway.ResourceBase",
-                  "version": "1.107.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-apigateway.LambdaRestApi",
-              "version": "1.107.0"
+              "version": "1.113.0"
             }
           },
           "CDKMetadata": {
@@ -1913,7 +1913,7 @@
                 "path": "CdkInfrastructureStack/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnResource",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               },
               "Condition": {
@@ -1921,25 +1921,25 @@
                 "path": "CdkInfrastructureStack/CDKMetadata/Condition",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnCondition",
-                  "version": "1.98.0"
+                  "version": "1.113.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/core.Construct",
-              "version": "1.98.0"
+              "version": "1.113.0"
             }
           }
         },
         "constructInfo": {
           "fqn": "@aws-cdk/core.Stack",
-          "version": "1.98.0"
+          "version": "1.113.0"
         }
       }
     },
     "constructInfo": {
       "fqn": "@aws-cdk/core.App",
-      "version": "1.98.0"
+      "version": "1.113.0"
     }
   }
 }
