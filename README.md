@@ -9,7 +9,7 @@
 
 You need to configure Amazon DevOps Guru service and specify the coverage for which AWS resources to analyze. If your applications are distributed across multiple AWS accounts and AWS regions, you need to configure DevOps Guru for each account-region combination. Though this may sound complex, it is infact very simple to do so using AWS CDK Stacks and StackSet. You can also use CDK stack to enable DevOps Guru at Orgnization Units (OU) level instead of logging into each account and enabling one by one. 
 
-Check out this APG Pattern for detailed deployment instructions: [Implement Next-Gen Ops using Amazon DevOps Guru across multiple accounts, regions and organizational units (OU)](https://apg-library.amazonaws.com/content/6075ca48-862a-4aa0-93c6-10bad8195a5c/1)  
+Check out this APG Pattern for detailed deployment instructions: [Implement Next-Gen Ops using Amazon DevOps Guru across multiple accounts, regions and organizational units (OU) with CDK](https://apg-library.amazonaws.com/content/6075ca48-862a-4aa0-93c6-10bad8195a5c)  
 
 ## Useful CDK commands
 
